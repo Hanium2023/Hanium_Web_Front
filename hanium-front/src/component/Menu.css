@@ -1,0 +1,27 @@
+.list-item {
+  transition: background-color 0.3s ease;
+
+  .MuiTypography-body1 {
+    font-weight: bold;
+    color: #c7c7c7;
+  }
+  .MuiSvgIcon-root {
+    fill: #c7c7c7;
+  }
+}
+
+.list-item:hover {
+  background-color: rgb(229, 241, 253);
+
+  .MuiTypography-body1 {
+    font-weight: bold;
+    color: #298ed2;
+  }
+  .MuiSvgIcon-root {
+    fill: #298ed2;
+  }
+}
+
+.MuiListItemIcon-root {
+  min-width: 40px;
+}
