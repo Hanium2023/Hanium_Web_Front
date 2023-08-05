@@ -28,14 +28,20 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function createData(name, location, date, estimatec_charge, protein) {
-  return { name, location, date, estimatec_charge, protein };
+function createData(name, location, date, usageCount, powerConsumption) {
+  return {
+    name,
+    location,
+    date,
+    usageCount,
+    powerConsumption,
+  };
 }
 
 const rows = [
-  createData("공기청정기", "거실", "2023/07/25 12:05", "$784"),
-  createData("모니터", "주방", "2023/07/25 12:05", "$784"),
-  createData("조명", "서재", "2023/07/25 12:05", "$784"),
+  createData("공기청정기", "거실", "2023/07/25 12:05", 4, 40), // 40W 전력소비, 4번 사용
+  createData("모니터", "주방", "2023/07/25 12:05", 10, 500), // 500W 전력소비, 10번 사용
+  createData("조명", "서재", "2023/07/25 12:05", 10, 25), // 25W 전력소비, 10번 사용
 ];
 
 const data = [
@@ -46,6 +52,8 @@ const data = [
   { name: "7/30", 공기청정기: 1, 조명: 4, 모니터: 2 },
   { name: "7/31", 공기청정기: 2, 조명: 5, 모니터: 1 },
 ];
+
+const electricityCostPerKWh = 0.12; //WH에 따른
 
 export default function Check() {
   const [tvMonitorTimestamp, setTvMonitorTimestamp] = useState("");
@@ -165,7 +173,13 @@ export default function Check() {
                             : row.date}
                         </TableCell>
                         <TableCell align="center">
-                          {row.estimatec_charge}
+                          $
+                          {(
+                            (row.usageCount *
+                              row.powerConsumption *
+                              electricityCostPerKWh) /
+                            1000
+                          ).toFixed(2)}
                         </TableCell>
                       </TableRow>
                     ))}
