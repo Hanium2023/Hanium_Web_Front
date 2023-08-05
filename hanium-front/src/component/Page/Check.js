@@ -50,10 +50,12 @@ const data = [
 export default function Check() {
   const [tvMonitorTimestamp, setTvMonitorTimestamp] = useState("");
   const [airPurifierTimestamp, setAirPurifierTimestamp] = useState("");
+  const [LightTimestamp, setLightTimestamp] = useState("");
 
   useEffect(() => {
     fetchTVMonitorTimestamp();
     fetchAirPurifierTimestamp();
+    fetchLightTimestamp();
   }, []);
 
   const fetchTVMonitorTimestamp = async () => {
@@ -85,6 +87,22 @@ export default function Check() {
       setAirPurifierTimestamp(response.data.switch.timestamp);
     } catch (error) {
       console.error("Error fetching air purifier timestamp:", error);
+    }
+  };
+
+  const fetchLightTimestamp = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.smartthings.com/v1/devices/3d46cf54-fb97-4649-ac80-336e883ed5a7/components/main/capabilities/switch/status",
+        {
+          headers: {
+            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+          },
+        }
+      );
+      setLightTimestamp(response.data.switch.timestamp);
+    } catch (error) {
+      console.error("Error fetching Light timestamp:", error);
     }
   };
 
@@ -142,6 +160,8 @@ export default function Check() {
                             ? tvMonitorTimestamp
                             : row.name === "공기청정기"
                             ? airPurifierTimestamp
+                            : row.name === "조명"
+                            ? LightTimestamp
                             : row.date}
                         </TableCell>
                         <TableCell align="center">
