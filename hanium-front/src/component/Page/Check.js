@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
@@ -18,6 +18,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -47,6 +48,46 @@ const data = [
 ];
 
 export default function Check() {
+  const [tvMonitorTimestamp, setTvMonitorTimestamp] = useState("");
+  const [airPurifierTimestamp, setAirPurifierTimestamp] = useState("");
+
+  useEffect(() => {
+    fetchTVMonitorTimestamp();
+    fetchAirPurifierTimestamp();
+  }, []);
+
+  const fetchTVMonitorTimestamp = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.smartthings.com/v1/devices/d4cf4e04-7edf-f983-36bf-0c7ae155cf24/components/main/capabilities/switch/status",
+        {
+          headers: {
+            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+          },
+        }
+      );
+      setTvMonitorTimestamp(response.data.switch.timestamp);
+    } catch (error) {
+      console.error("Error fetching TV monitor timestamp:", error);
+    }
+  };
+
+  const fetchAirPurifierTimestamp = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.smartthings.com/v1/devices/844c4982-96a7-fb10-5e40-65f60aee9e9d/components/main/capabilities/switch/status",
+        {
+          headers: {
+            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+          },
+        }
+      );
+      setAirPurifierTimestamp(response.data.switch.timestamp);
+    } catch (error) {
+      console.error("Error fetching air purifier timestamp:", error);
+    }
+  };
+
   return (
     <div>
       <h1>가전 제품 제어 현황 확인</h1>
@@ -79,10 +120,8 @@ export default function Check() {
                     <TableRow>
                       <TableCell align="center">가전제품</TableCell>
                       <TableCell align="center">위치</TableCell>
-                      <TableCell align="center">
-                        최종 사용일자/시각(g)
-                      </TableCell>
-                      <TableCell align="center">예상 요금(g)</TableCell>
+                      <TableCell align="center">최종 사용일자/시각</TableCell>
+                      <TableCell align="center">예상 요금</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -97,7 +136,14 @@ export default function Check() {
                           {row.name}
                         </TableCell>
                         <TableCell align="center">{row.location}</TableCell>
-                        <TableCell align="center">{row.date}</TableCell>
+                        {/* Render the fetched timestamps */}
+                        <TableCell align="center">
+                          {row.name === "모니터"
+                            ? tvMonitorTimestamp
+                            : row.name === "공기청정기"
+                            ? airPurifierTimestamp
+                            : row.date}
+                        </TableCell>
                         <TableCell align="center">
                           {row.estimatec_charge}
                         </TableCell>
