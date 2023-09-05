@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <div className="app-container">
         <Menu />
-        <div className="content-container">
+        <div className="content-container" style={{ background: "#F2F2F2" }}>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/check" element={<Check />} />

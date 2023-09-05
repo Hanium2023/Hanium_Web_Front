@@ -16,7 +16,7 @@ import ListIcon from "@mui/icons-material/List";
 import SettingsIcon from "@mui/icons-material/Settings";
 import "./Menu.css";
 
-const drawerWidth = 280;
+const drawerWidth = 320;
 
 export default function Menu() {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ export default function Menu() {
           {[
             { text: "Main", path: "/" },
             { text: "Check", path: "/check" },
-            { text: "Setting", path: "/setting" },
+            { text: "Device", path: "/setting" },
           ].map((item, index) => (
             <ListItem key={item.text} disablePadding className="list-item">
               <ListItemButton onClick={() => handleMenuClick(item.path)}>
