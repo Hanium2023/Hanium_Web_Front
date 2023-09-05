@@ -19,6 +19,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
+import Weather from "./Weather";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -115,84 +116,88 @@ export default function Check() {
   };
 
   return (
-    <div>
-      <h1>가전 제품 제어 현황 확인</h1>
-      <Box sx={{ width: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs>
-            <Item>
-              <h2>각 가전 제품별 제어 횟수 현황</h2>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <BarChart width={1200} height={550} data={data}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="공기청정기" fill="#FF5722" />
-                  <Bar dataKey="조명" fill="#4CAF50" />
-                  <Bar dataKey="모니터" fill="#2196F3" />
-                </BarChart>
-              </div>
-            </Item>
-          </Grid>
+    <div style={{ backgroundColor: "#F2F2F2" }}>
+      <div>
+        <h1>가전 제품 제어 현황 확인</h1>
+        <Box sx={{ width: 1 }}>
+          <Grid container spacing={2}>
+            <Grid item xs>
+              <Item>
+                <h2>각 가전 제품별 제어 횟수 현황</h2>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <BarChart width={1200} height={550} data={data}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="공기청정기" fill="#FF5722" />
+                    <Bar dataKey="조명" fill="#4CAF50" />
+                    <Bar dataKey="모니터" fill="#2196F3" />
+                  </BarChart>
+                </div>
+              </Item>
+            </Grid>
 
-          <Grid item xs={8}>
-            <Item>
-              <h2>각 가전 제품별 예상 전기 요금</h2>
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="center">가전제품</TableCell>
-                      <TableCell align="center">위치</TableCell>
-                      <TableCell align="center">최종 사용일자/시각</TableCell>
-                      <TableCell align="center">예상 요금</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.name}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell align="center" component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="center">{row.location}</TableCell>
-                        {/* Render the fetched timestamps */}
-                        <TableCell align="center">
-                          {row.name === "모니터"
-                            ? tvMonitorTimestamp
-                            : row.name === "공기청정기"
-                            ? airPurifierTimestamp
-                            : row.name === "조명"
-                            ? LightTimestamp
-                            : row.date}
-                        </TableCell>
-                        <TableCell align="center">
-                          $
-                          {(
-                            (row.usageCount *
-                              row.powerConsumption *
-                              electricityCostPerKWh) /
-                            1000
-                          ).toFixed(2)}
-                        </TableCell>
+            <Grid item xs={8}>
+              <Item>
+                <h2>각 가전 제품별 예상 전기 요금</h2>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="center">가전제품</TableCell>
+                        <TableCell align="center">위치</TableCell>
+                        <TableCell align="center">최종 사용일자/시각</TableCell>
+                        <TableCell align="center">예상 요금</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Item>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <TableRow
+                          key={row.name}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell align="center" component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="center">{row.location}</TableCell>
+                          {/* Render the fetched timestamps */}
+                          <TableCell align="center">
+                            {row.name === "모니터"
+                              ? tvMonitorTimestamp
+                              : row.name === "공기청정기"
+                              ? airPurifierTimestamp
+                              : row.name === "조명"
+                              ? LightTimestamp
+                              : row.date}
+                          </TableCell>
+                          <TableCell align="center">
+                            $
+                            {(
+                              (row.usageCount *
+                                row.powerConsumption *
+                                electricityCostPerKWh) /
+                              1000
+                            ).toFixed(2)}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Item>
+            </Grid>
+            <Grid item xs={4}>
+              <Item>
+                <Weather style={{ width: "100%", height: "100%" }} />
+              </Item>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Item>xs=4</Item>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </div>
     </div>
   );
 }
