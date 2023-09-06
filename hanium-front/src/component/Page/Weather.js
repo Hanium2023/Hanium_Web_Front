@@ -18,7 +18,7 @@ class Weather extends Component {
 
   componentDidMount() {
     const cityName = "Incheon";
-    const apiKey = "89d00429344ddba7cfdf287090ed1b0e";
+    const apiKey = "mykey";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
     axios
