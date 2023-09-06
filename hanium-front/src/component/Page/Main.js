@@ -9,7 +9,7 @@ const CenteredIframeWrapper = styled("div")({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "calc(100vh - 350px)", // 조정 가능한 높이 값 (헤더 등에 따라 다름)
+  height: "calc(100vh - 300px)", // 조정 가능한 높이 값 (헤더 등에 따라 다름)
 });
 
 const TooltipCustom = styled(({ className, ...props }) => (
@@ -160,7 +160,29 @@ const Main = () => {
   return (
     <div>
       <div>
-        <h1>우리집 확인</h1>
+        <h1>
+          우리집 확인{" "}
+          <button
+            style={{
+              background: "#ffffff",
+              borderRadius: "5px",
+              borderColor: "transparent",
+              color: "#000000",
+              padding: "5px",
+            }}
+            onClick={addMultipleMattertags}
+            // 호버 스타일을 정의합니다.
+            onMouseEnter={(e) => {
+              e.target.style.background = "#cccccc"; // 호버 시 배경색 변경
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = "#ffffff"; // 호버 해제 시 원래 배경색 복원
+            }}
+          >
+            연동하기
+          </button>{" "}
+        </h1>
+
         <CenteredIframeWrapper>
           <div
             className="container"
@@ -168,11 +190,6 @@ const Main = () => {
             style={{ width: "80%", height: "550px" }}
           ></div>
         </CenteredIframeWrapper>
-        <div className="button-wrap">
-          <button onClick={addMultipleMattertags}>
-            Add Multiple Mattertags
-          </button>
-        </div>
       </div>
       <h2>제어할 수 있는 가전</h2>
       <div
