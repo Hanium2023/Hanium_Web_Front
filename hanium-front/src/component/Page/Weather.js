@@ -47,28 +47,34 @@ class Weather extends Component {
     } else {
       return (
         <div>
-          <div>
-            <img
-              src={img_url}
-              alt="Weather Icon"
-              style={{ width: '200px', height: '200px' }}
-            />
-            <div>{this.state.desc}</div>
-          </div>
-          <div>
-            <h1>{(this.state.temp - 273.15).toFixed(0)}°C</h1>
-          </div>
-          <div>
-            <h3>
-              최고: {(this.state.temp_max - 273.15).toFixed(0)}°C / 최저:{' '}
-              {(this.state.temp_min - 273.15).toFixed(0)}°
-            </h3>
-          </div>
-          <div>
-            <span style={{ marginTop: '7px', marginRight: '8px' }}>
-              <h3>현재 습도 : {this.state.humidity}%</h3>
-            </span>
-          </div>
+          <Grid container spacing={2} columns={16}>
+            <Grid item xs={8}>
+              <div>
+                <img
+                  src={img_url}
+                  alt="Weather Icon"
+                  style={{ width: '100px', height: '100px' }}
+                />
+                <div>{this.state.desc}</div>
+              </div>
+            </Grid>
+            <Grid item xs={8}>
+              <div>
+                <h1>{(this.state.temp - 273.15).toFixed(0)}°C</h1>
+              </div>
+              <div>
+                <h4>
+                  최고: {(this.state.temp_max - 273.15).toFixed(0)}°C / 최저:{' '}
+                  {(this.state.temp_min - 273.15).toFixed(0)}°
+                </h4>
+              </div>
+              <div>
+                <span style={{ marginTop: '7px', marginRight: '8px' }}>
+                  <h4>현재 습도 : {this.state.humidity}%</h4>
+                </span>
+              </div>
+            </Grid>
+          </Grid>
         </div>
       )
     }

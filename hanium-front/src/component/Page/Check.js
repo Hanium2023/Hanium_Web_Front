@@ -140,24 +140,16 @@ export default function Check() {
             </Grid>
 
             <Grid item xs={8}>
-              <Item style={{ height: '450px' }}>
-                <h1>각 가전 제품별 예상 전기 요금</h1>
+              <Item>
+                <h2>각 가전 제품별 예상 전기 요금</h2>
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 500 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align="center">
-                          <h2>가전제품</h2>
-                        </TableCell>
-                        <TableCell align="center">
-                          <h2>위치</h2>
-                        </TableCell>
-                        <TableCell align="center">
-                          <h2>최종 사용일자/시각</h2>
-                        </TableCell>
-                        <TableCell align="center">
-                          <h2>예상 요금</h2>
-                        </TableCell>
+                        <TableCell align="center">가전제품</TableCell>
+                        <TableCell align="center">위치</TableCell>
+                        <TableCell align="center">최종 사용일자/시각</TableCell>
+                        <TableCell align="center">예상 요금</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -168,36 +160,21 @@ export default function Check() {
                             '&:last-child td, &:last-child th': { border: 0 },
                           }}
                         >
-                          <TableCell
-                            align="center"
-                            component="th"
-                            scope="row"
-                            style={{ fontSize: '20px' }}
-                          >
+                          <TableCell align="center" component="th" scope="row">
                             {row.name}
                           </TableCell>
-                          <TableCell
-                            align="center"
-                            style={{ fontSize: '20px' }}
-                          >
-                            {row.location}
-                          </TableCell>
-                          <TableCell
-                            align="center"
-                            style={{ fontSize: '20px' }}
-                          >
+                          <TableCell align="center">{row.location}</TableCell>
+                          {/* Render the fetched timestamps */}
+                          <TableCell align="center">
                             {row.name === '모니터'
-                              ? '2023-09-16T03:20:12.543Z'
+                              ? tvMonitorTimestamp
                               : row.name === '공기청정기'
-                              ? '2023-09-17T09:30:49.375Z'
+                              ? airPurifierTimestamp
                               : row.name === '조명'
-                              ? '2023-09-17T20:54:23.455Z'
+                              ? LightTimestamp
                               : row.date}
                           </TableCell>
-                          <TableCell
-                            align="center"
-                            style={{ fontSize: '20px' }}
-                          >
+                          <TableCell align="center">
                             $
                             {(
                               (row.usageCount *
@@ -214,14 +191,8 @@ export default function Check() {
               </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item style={{ height: '450px' }}>
-                <Weather
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    justifyContent: 'center',
-                  }}
-                />
+              <Item>
+                <Weather style={{ width: '100%', height: '100%' }} />
               </Item>
             </Grid>
           </Grid>
