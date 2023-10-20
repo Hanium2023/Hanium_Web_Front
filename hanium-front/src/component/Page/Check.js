@@ -221,13 +221,13 @@ export default function Check() {
                             align="center"
                             style={{ fontSize: "15px" }}
                           >
-                            $
                             {(
                               (row.usageCount *
                                 row.powerConsumption *
                                 electricityCostPerKWh) /
                               1000
                             ).toFixed(2)}
+                            원
                           </TableCell>
                         </TableRow>
                       ))}
