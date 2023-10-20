@@ -56,7 +56,6 @@ export default function Menu() {
           {[
             { text: "Main", path: "/" },
             { text: "Check", path: "/check" },
-            { text: "Device", path: "/setting" },
           ].map((item, index) => (
             <ListItem key={item.text} disablePadding className="list-item">
               <ListItemButton onClick={() => handleMenuClick(item.path)}>
