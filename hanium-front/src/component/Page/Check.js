@@ -60,12 +60,35 @@ export default function Check() {
   const [tvMonitorTimestamp, setTvMonitorTimestamp] = useState("");
   const [airPurifierTimestamp, setAirPurifierTimestamp] = useState("");
   const [LightTimestamp, setLightTimestamp] = useState("");
+  const [countData, setCountData] = useState([]);
 
   useEffect(() => {
     fetchTVMonitorTimestamp();
     fetchAirPurifierTimestamp();
     fetchLightTimestamp();
+    fetchCountData();
   }, []);
+
+  const fetchCountData = async () => {
+    try {
+      const response = await axios.get(
+        "http://3.34.129.217:8086/appliance/count"
+      );
+      setCountData(response.data.result);
+    } catch (error) {
+      console.error("Error fetching count data:", error);
+    }
+  };
+
+  const createGraphData = () => {
+    const graphData = countData.map((item) => ({
+      name: item.date,
+      공기청정기: item.airCnt,
+      조명: item.lightCnt,
+      모니터: item.monitorCnt,
+    }));
+    return graphData;
+  };
 
   const fetchTVMonitorTimestamp = async () => {
     try {
@@ -102,7 +125,7 @@ export default function Check() {
   const fetchLightTimestamp = async () => {
     try {
       const response = await axios.get(
-        "https://api.smartthings.com/v1/devices/3d46cf54-fb97-4649-ac80-336e883ed5a7/components/main/capabilities/switch/status",
+        "https://api.smartthings.com/v1/devices/b2cdff25-4a9b-4861-9895-dcca2b3194cd/components/main/capabilities/switch/status",
         {
           headers: {
             Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
@@ -125,7 +148,7 @@ export default function Check() {
               <Item>
                 <h2>각 가전 제품별 제어 횟수 현황</h2>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <BarChart width={1200} height={550} data={data}>
+                  <BarChart width={1200} height={550} data={createGraphData()}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
