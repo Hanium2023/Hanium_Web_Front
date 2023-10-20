@@ -45,15 +45,6 @@ const rows = [
   createData("조명", "서재", "2023/09/17 18:14", 26, 20), // 20W 전력소비, 10번 사용
 ];
 
-const data = [
-  { name: "9/12", 공기청정기: 1, 조명: 2, 모니터: 2 },
-  { name: "9/13", 공기청정기: 2, 조명: 4, 모니터: 5 },
-  { name: "9/14", 공기청정기: 2, 조명: 8, 모니터: 5 },
-  { name: "9/15", 공기청정기: 4, 조명: 5, 모니터: 3 },
-  { name: "9/16", 공기청정기: 1, 조명: 2, 모니터: 1 },
-  { name: "9/17", 공기청정기: 2, 조명: 5, 모니터: 0 },
-];
-
 const electricityCostPerKWh = 0.12; //WH에 따른
 
 export default function Check() {
@@ -81,12 +72,17 @@ export default function Check() {
   };
 
   const createGraphData = () => {
-    const graphData = countData.map((item) => ({
+    const dataLength = countData.length;
+    const startIdx = Math.max(dataLength - 6, 0);
+    const filteredData = countData.slice(startIdx);
+
+    const graphData = filteredData.map((item) => ({
       name: item.date,
       공기청정기: item.airCnt,
       조명: item.lightCnt,
       모니터: item.monitorCnt,
     }));
+
     return graphData;
   };
 
