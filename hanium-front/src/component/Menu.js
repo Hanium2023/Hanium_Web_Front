@@ -13,7 +13,6 @@ import ListItemText from "@mui/material/ListItemText";
 import logo from "./logo.png";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import ListIcon from "@mui/icons-material/List";
-import SettingsIcon from "@mui/icons-material/Settings";
 import "./Menu.css";
 
 const drawerWidth = 320;
@@ -62,7 +61,6 @@ export default function Menu() {
                 <ListItemIcon>
                   {index === 0 && <SignalCellularAltIcon />}
                   {index === 1 && <ListIcon />}
-                  {index === 2 && <SettingsIcon />}
                 </ListItemIcon>
                 <ListItemText>
                   <Typography variant="body1" fontWeight="bold">
