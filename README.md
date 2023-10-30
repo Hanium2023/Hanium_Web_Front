@@ -9,8 +9,8 @@
 http://haniumfront.s3-website.ap-northeast-2.amazonaws.com/
 
 ## 화면
-<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/a20969b0-bf58-4f1a-bf27-f3fcff504b6f">
-<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/c42e5e8d-0d53-48ed-8188-329aaa33a8c1">
+<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/ea9dfa2b-60f8-44ff-b887-eb4ab99e1a37">
+<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/cd841513-5577-4905-b3bf-541f774deb78">
 
 
 ## 참고
