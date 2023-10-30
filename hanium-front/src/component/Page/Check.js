@@ -20,6 +20,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import Weather from "./Weather";
+import "./styles.css";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,6 +28,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   textAlign: "center",
   color: theme.palette.text.secondary,
+  fontFamily: "Apple Pretendard, sans-serif",
 }));
 
 function createData(name, location, date, usageCount, powerConsumption) {
@@ -40,24 +42,28 @@ function createData(name, location, date, usageCount, powerConsumption) {
 }
 
 const rows = [
-  createData("공기청정기", "거실", "2023/09/17 04:05", 12, 40), // 40W 전력소비, 4번 사용
-  createData("모니터", "주방", "2023/09/15 10:47", 16, 500), // 500W 전력소비, 10번 사용
-  createData("조명", "서재", "2023/09/17 18:14", 26, 20), // 20W 전력소비, 10번 사용
+  createData("공기청정기", "거실"),
+  createData("모니터", "주방"),
+  createData("조명", "서재"),
 ];
 
-const electricityCostPerKWh = 0.12; //WH에 따른
+const electricityCostPerKWh = 136.76; //W에 따른 전기요금
 
 export default function Check() {
   const [tvMonitorTimestamp, setTvMonitorTimestamp] = useState("");
   const [airPurifierTimestamp, setAirPurifierTimestamp] = useState("");
   const [LightTimestamp, setLightTimestamp] = useState("");
   const [countData, setCountData] = useState([]);
+  const [airElectricityCost, setAirElectricityCost] = useState(0);
+  const [monitorElectricityCost, setMonitorElectricityCost] = useState(0);
+  const [lightElectricityCost, setLightElectricityCost] = useState(0);
 
   useEffect(() => {
     fetchTVMonitorTimestamp();
     fetchAirPurifierTimestamp();
     fetchLightTimestamp();
     fetchCountData();
+    ElectricityCostPerKWh();
   }, []);
 
   const fetchCountData = async () => {
@@ -68,6 +74,66 @@ export default function Check() {
       setCountData(response.data.result);
     } catch (error) {
       console.error("Error fetching count data:", error);
+    }
+  };
+
+  const ElectricityCostPerKWh = async () => {
+    try {
+      const response = await axios.get(
+        "http://3.34.129.217:8086/appliance/count"
+      );
+      const countData = response.data.result;
+
+      // 현재 날짜를 얻기
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+      const currentMonth = currentDate.getMonth() + 1; // 월은 0부터 시작하므로 +1 해줍니다
+
+      // 현재 달을 "YYYY-MM" 형식으로 설정
+      const currentMonthStr = `${currentYear}-${
+        currentMonth < 10 ? "0" : ""
+      }${currentMonth}`;
+
+      const airTotal = countData
+        .filter((entry) => entry.date.startsWith(currentMonthStr))
+        .reduce((total, entry) => total + entry.airCnt, 0);
+
+      const monitorTotal = countData
+        .filter((entry) => entry.date.startsWith(currentMonthStr))
+        .reduce((total, entry) => total + entry.monitorCnt, 0);
+
+      const lightTotal = countData
+        .filter((entry) => entry.date.startsWith(currentMonthStr))
+        .reduce((total, entry) => total + entry.lightCnt, 0);
+
+      const airElectricityCost = (
+        (airTotal * electricityCostPerKWh * 30) /
+        1000
+      ) // 30 W 사용
+        .toFixed(2);
+
+      const monitorElectricityCost = (
+        (monitorTotal * electricityCostPerKWh * 30) /
+        1000
+      ) // 30 W 사용
+        .toFixed(2);
+
+      const lightElectricityCost = (
+        (lightTotal * electricityCostPerKWh * 15) /
+        1000
+      ) // 15W 사용
+        .toFixed(2);
+
+      setAirElectricityCost(airElectricityCost);
+      setMonitorElectricityCost(monitorElectricityCost);
+      setLightElectricityCost(lightElectricityCost);
+    } catch (error) {
+      console.error("Error fetching count data:", error);
+      return {
+        airElectricityCost: 0,
+        monitorElectricityCost: 0,
+        lightElectricityCost: 0,
+      }; // 에러 발생 시 기본값 반환
     }
   };
 
@@ -137,7 +203,7 @@ export default function Check() {
   return (
     <div style={{ backgroundColor: "#F2F2F2" }}>
       <div>
-        <h1>가전 제품 제어 현황 확인</h1>
+        <h1 style={{ marginTop: "-2px" }}>가전 제품 제어 현황 확인</h1>
         <Box sx={{ width: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs>
@@ -217,12 +283,13 @@ export default function Check() {
                             align="center"
                             style={{ fontSize: "15px" }}
                           >
-                            {(
-                              (row.usageCount *
-                                row.powerConsumption *
-                                electricityCostPerKWh) /
-                              1000
-                            ).toFixed(2)}
+                            {row.name === "모니터"
+                              ? monitorElectricityCost
+                              : row.name === "공기청정기"
+                              ? airElectricityCost
+                              : row.name === "조명"
+                              ? lightElectricityCost
+                              : row.date}
                             원
                           </TableCell>
                         </TableRow>
