@@ -158,9 +158,9 @@ const Main = () => {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "Pretendard" }}>
       <div>
-        <h1>
+        <h1 style={{ marginTop: "-2px" }}>
           우리집 확인{" "}
           <button
             style={{
@@ -187,11 +187,11 @@ const Main = () => {
           <div
             className="container"
             ref={container}
-            style={{ width: "80%", height: "600px", marginTop: "-5px" }}
+            style={{ width: "85%", height: "630px", marginTop: "10px" }}
           ></div>
         </CenteredIframeWrapper>
       </div>
-      <h2>제어할 수 있는 가전</h2>
+      <h2 style={{ marginTop: "40px" }}>제어할 수 있는 가전</h2>
       <div
         style={{
           display: "flex",
@@ -228,8 +228,8 @@ const Main = () => {
               <Box
                 sx={{
                   flex: "0 0 18%",
-                  height: "100px",
-                  margin: "-10px 0 10px 20px",
+                  height: "80px",
+                  margin: "-3px 0 10px 20px",
                   borderRadius: "10px",
                   backgroundColor: "lightgray",
                   "&:hover": {
@@ -264,7 +264,7 @@ const Main = () => {
                     : ""
                 }`}
               >
-                <h2
+                <h3
                   style={{
                     textAlign: "center",
                     display: "flex",
@@ -274,7 +274,7 @@ const Main = () => {
                   }}
                 >
                   {displayName}
-                </h2>
+                </h3>
               </Box>
             </TooltipCustom>
           );
