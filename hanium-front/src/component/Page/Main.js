@@ -187,7 +187,7 @@ const Main = () => {
           <div
             className="container"
             ref={container}
-            style={{ width: "80%", height: "600px" }}
+            style={{ width: "80%", height: "600px", marginTop: "-5px" }}
           ></div>
         </CenteredIframeWrapper>
       </div>
@@ -227,9 +227,9 @@ const Main = () => {
             >
               <Box
                 sx={{
-                  flex: "0 0 20%",
+                  flex: "0 0 18%",
                   height: "100px",
-                  margin: "10px 0 10px 20px",
+                  margin: "-10px 0 10px 20px",
                   borderRadius: "10px",
                   backgroundColor: "lightgray",
                   "&:hover": {
