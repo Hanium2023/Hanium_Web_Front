@@ -90,14 +90,14 @@ const Main = () => {
     fetchAirPurifierSwitch();
     fetchLightSwitch();
   }, []);
-
+  const namekey = process.env.REACT_APP_Name;
   const fetchApplianceNames = async () => {
     try {
       const response = await axios.get(
         "https://api.smartthings.com/v1/devices/",
         {
           headers: {
-            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+            Authorization: namekey,
           },
         }
       );
@@ -108,14 +108,14 @@ const Main = () => {
       console.error("Error fetching appliance names:", error);
     }
   };
-
+  const monitorkey = process.env.REACT_APP_Monitor;
   const fetchTVMonitorSwitch = async () => {
     try {
       const response = await axios.get(
         "https://api.smartthings.com/v1/devices/d4cf4e04-7edf-f983-36bf-0c7ae155cf24/components/main/capabilities/switch/status",
         {
           headers: {
-            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+            Authorization: monitorkey,
           },
         }
       );
@@ -124,14 +124,14 @@ const Main = () => {
       console.error("Error fetching TV monitor Switch:", error);
     }
   };
-
+  const airkey = process.env.REACT_APP_Air;
   const fetchAirPurifierSwitch = async () => {
     try {
       const response = await axios.get(
         "https://api.smartthings.com/v1/devices/844c4982-96a7-fb10-5e40-65f60aee9e9d/components/main/capabilities/switch/status",
         {
           headers: {
-            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+            Authorization: airkey,
           },
         }
       );
