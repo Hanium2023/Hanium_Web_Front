@@ -42,9 +42,9 @@ function createData(name, location, date, usageCount, powerConsumption) {
 }
 
 const rows = [
-  createData("공기청정기", "거실"),
-  createData("모니터", "주방"),
-  createData("조명", "서재"),
+  createData("공기청정기", "발표장"),
+  createData("모니터", "발표장"),
+  createData("조명", "발표장"),
 ];
 
 const electricityCostPerKWh = 136.76; //W에 따른 전기요금
