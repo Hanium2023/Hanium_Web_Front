@@ -6,7 +6,7 @@
 -날씨   
 
 ## 배포
-http://haniumfront.s3-website.ap-northeast-2.amazonaws.com/
+http://haniumfront.s3-website.ap-northeast-2.amazonaws.com/check
 
 ## 화면
 <img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/ea9dfa2b-60f8-44ff-b887-eb4ab99e1a37">
