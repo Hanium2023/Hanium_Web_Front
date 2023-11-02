@@ -140,14 +140,14 @@ const Main = () => {
       console.error("Error fetching air purifier Switch:", error);
     }
   };
-
+  const lightkey = process.env.REACT_APP_Light;
   const fetchLightSwitch = async () => {
     try {
       const response = await axios.get(
         "https://api.smartthings.com/v1/devices/b2cdff25-4a9b-4861-9895-dcca2b3194cd/components/main/capabilities/switch/status",
         {
           headers: {
-            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+            Authorization: lightkey,
           },
         }
       );
