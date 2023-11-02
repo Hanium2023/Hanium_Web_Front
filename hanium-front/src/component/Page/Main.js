@@ -109,10 +109,11 @@ const Main = () => {
     }
   };
   const monitorkey = process.env.REACT_APP_Monitor;
+  const monitorSwitch = process.env.REACT_APP_MonitorSwitch;
   const fetchTVMonitorSwitch = async () => {
     try {
       const response = await axios.get(
-        "https://api.smartthings.com/v1/devices/d4cf4e04-7edf-f983-36bf-0c7ae155cf24/components/main/capabilities/switch/status",
+        `https://api.smartthings.com/v1/devices/${monitorSwitch}/components/main/capabilities/switch/status`,
         {
           headers: {
             Authorization: monitorkey,
@@ -125,10 +126,11 @@ const Main = () => {
     }
   };
   const airkey = process.env.REACT_APP_Air;
+  const airSwitch = process.env.REACT_APP_AirSwitch;
   const fetchAirPurifierSwitch = async () => {
     try {
       const response = await axios.get(
-        "https://api.smartthings.com/v1/devices/844c4982-96a7-fb10-5e40-65f60aee9e9d/components/main/capabilities/switch/status",
+        `https://api.smartthings.com/v1/devices/${airSwitch}/components/main/capabilities/switch/status`,
         {
           headers: {
             Authorization: airkey,
@@ -141,10 +143,12 @@ const Main = () => {
     }
   };
   const lightkey = process.env.REACT_APP_Light;
+  const lightswitch = process.env.REACT_APP_LightSwitch;
+
   const fetchLightSwitch = async () => {
     try {
       const response = await axios.get(
-        "https://api.smartthings.com/v1/devices/b2cdff25-4a9b-4861-9895-dcca2b3194cd/components/main/capabilities/switch/status",
+        `https://api.smartthings.com/v1/devices/${lightswitch}/components/main/capabilities/switch/status`,
         {
           headers: {
             Authorization: lightkey,

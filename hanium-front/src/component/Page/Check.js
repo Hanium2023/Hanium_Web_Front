@@ -151,14 +151,15 @@ export default function Check() {
 
     return graphData;
   };
-
+  const TvTimeKey = process.env.REACT_APP_TvTimeKey;
+  const TvTimeAuth = process.env.REACT_APP_TvTimeAuth;
   const fetchTVMonitorTimestamp = async () => {
     try {
       const response = await axios.get(
-        "https://api.smartthings.com/v1/devices/d4cf4e04-7edf-f983-36bf-0c7ae155cf24/components/main/capabilities/switch/status",
+        `https://api.smartthings.com/v1/devices/${TvTimeKey}/components/main/capabilities/switch/status`,
         {
           headers: {
-            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+            Authorization: TvTimeAuth,
           },
         }
       );
@@ -168,13 +169,16 @@ export default function Check() {
     }
   };
 
+  const AirTimeKey = process.env.REACT_APP_AirTimeKey;
+  const AirTimeAuth = process.env.REACT_APP_AirTimeAuth;
+
   const fetchAirPurifierTimestamp = async () => {
     try {
       const response = await axios.get(
-        "https://api.smartthings.com/v1/devices/844c4982-96a7-fb10-5e40-65f60aee9e9d/components/main/capabilities/switch/status",
+        `https://api.smartthings.com/v1/devices/${AirTimeKey}/components/main/capabilities/switch/status`,
         {
           headers: {
-            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+            Authorization: AirTimeAuth,
           },
         }
       );
@@ -184,13 +188,15 @@ export default function Check() {
     }
   };
 
+  const LightTimeKey = process.env.REACT_APP_LightTimeKey;
+  const LightTimeAuth = process.env.REACT_APP_LightTimeAuth;
   const fetchLightTimestamp = async () => {
     try {
       const response = await axios.get(
-        "https://api.smartthings.com/v1/devices/b2cdff25-4a9b-4861-9895-dcca2b3194cd/components/main/capabilities/switch/status",
+        `https://api.smartthings.com/v1/devices/${LightTimeKey}/components/main/capabilities/switch/status`,
         {
           headers: {
-            Authorization: "Bearer 1c347acf-6ddb-437a-b020-fcd3cdedad89",
+            Authorization: LightTimeAuth,
           },
         }
       );
