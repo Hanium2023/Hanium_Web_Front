@@ -31,7 +31,9 @@ const Main = () => {
   const [applianceNames, setApplianceNames] = useState([]);
   const [tvMonitorSwitch, setTvMonitorSwitch] = useState("");
   const [airPurifierSwitch, setAirPurifierSwitch] = useState("");
+  const [airPurifierState, setAirPurifierState] = useState("");
   const [lightSwitch, setLightSwitch] = useState("");
+  const [lightState, setLightState] = useState("");
   const [sdk, setSdk] = useState();
   const container = useRef(null);
   let started = false;
@@ -60,13 +62,19 @@ const Main = () => {
     const mattertags = [
       {
         label: "조명",
-        description: "작동 여부: " + lightSwitch,
+        description:
+          "작동 여부: " + lightSwitch + "\n" + "조명 색: " + lightState,
         anchorPosition: { x: 0, y: 0.9, z: 1.3 },
         stemVector: { x: 0, y: 0.9, z: 1.3 },
       },
       {
         label: "공기청정기",
-        description: "작동 여부: " + airPurifierSwitch,
+        description:
+          "작동 여부: " +
+          airPurifierSwitch +
+          "\n" +
+          "공기청정기 상태: " +
+          airPurifierState,
         anchorPosition: { x: 0.8, y: 0.4, z: 1 },
         stemVector: { x: 0.8, y: 0.4, z: 1 },
       },
@@ -88,7 +96,9 @@ const Main = () => {
     fetchApplianceNames();
     fetchTVMonitorSwitch();
     fetchAirPurifierSwitch();
+    fetchAirPurifierState();
     fetchLightSwitch();
+    fetchLightState();
   }, []);
   const namekey = process.env.REACT_APP_Name;
   const fetchApplianceNames = async () => {
@@ -142,6 +152,22 @@ const Main = () => {
       console.error("Error fetching air purifier Switch:", error);
     }
   };
+  const fetchAirPurifierState = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.smartthings.com/v1/devices/${airSwitch}/components/main/capabilities/airConditionerFanMode/status`,
+        {
+          headers: {
+            Authorization: airkey,
+          },
+        }
+      );
+      setAirPurifierState(response.data.fanMode.value);
+    } catch (error) {
+      console.error("Error fetching air purifier State:", error);
+    }
+  };
+
   const lightkey = process.env.REACT_APP_Light;
   const lightswitch = process.env.REACT_APP_LightSwitch;
 
@@ -158,6 +184,29 @@ const Main = () => {
       setLightSwitch(response.data.switch.value);
     } catch (error) {
       console.error("Error fetching Light Switch:", error);
+    }
+  };
+
+  const fetchLightState = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.smartthings.com/v1/devices/${lightswitch}/components/main/capabilities/colorControl/status`,
+        {
+          headers: {
+            Authorization: lightkey,
+          },
+        }
+      );
+      // setLightState(response.data.hue.value);
+      if (response.data.hue.value == "150") {
+        setLightState("흰색");
+      } else if (response.data.hue.value == "115") {
+        setLightState("연한 노란색");
+      } else if (response.data.hue.value == "80") {
+        setLightState("분홍색");
+      }
+    } catch (error) {
+      console.error("Error fetching Light State:", error);
     }
   };
 
@@ -222,9 +271,19 @@ const Main = () => {
                 displayName === "Samsung M5 모니터"
                   ? "작동 여부: " + tvMonitorSwitch + "\n가전 정보: " + name
                   : displayName === "Samsung 공기청정기"
-                  ? "작동 여부: " + "off" + "\n가전 정보: " + name
+                  ? "작동 여부: " +
+                    airPurifierSwitch +
+                    "\n가전 정보: " +
+                    name +
+                    "\n풍량 정보: " +
+                    airPurifierState
                   : displayName === "Philips Hue 조명"
-                  ? "작동여부: " + "on" + "\n가전 정보: " + name
+                  ? "작동여부: " +
+                    lightSwitch +
+                    "\n가전 정보: " +
+                    name +
+                    "\n전구 색: " +
+                    lightState
                   : ""
               }
               key={name}
