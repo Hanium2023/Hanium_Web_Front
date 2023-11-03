@@ -198,11 +198,20 @@ const Main = () => {
         }
       );
       // setLightState(response.data.hue.value);
-      if (response.data.hue.value == "150") {
+      if (
+        response.data.hue.value >= "148" &&
+        response.data.hue.value <= "152"
+      ) {
         setLightState("흰색");
-      } else if (response.data.hue.value == "115") {
+      } else if (
+        response.data.hue.value >= "113" &&
+        response.data.hue.value <= "117"
+      ) {
         setLightState("연한 노란색");
-      } else if (response.data.hue.value == "80") {
+      } else if (
+        response.data.hue.value >= "78" &&
+        response.data.hue.value <= "82"
+      ) {
         setLightState("분홍색");
       }
     } catch (error) {
