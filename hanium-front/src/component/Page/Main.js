@@ -162,7 +162,17 @@ const Main = () => {
           },
         }
       );
-      setAirPurifierState(response.data.fanMode.value);
+      if (response.data.fanMode.value == "low") {
+        setAirPurifierState("미풍");
+      } else if (response.data.fanMode.value == "sleep") {
+        setAirPurifierState("수면풍");
+      } else if (response.data.fanMode.value == "medium") {
+        setAirPurifierState("약풍");
+      } else if (response.data.fanMode.value == "high") {
+        setAirPurifierState("강풍");
+      } else {
+        setAirPurifierState("알 수 없음");
+      }
     } catch (error) {
       console.error("Error fetching air purifier State:", error);
     }
@@ -213,6 +223,8 @@ const Main = () => {
         response.data.hue.value <= "82"
       ) {
         setLightState("분홍색");
+      } else {
+        setLightState("알 수 없음");
       }
     } catch (error) {
       console.error("Error fetching Light State:", error);
