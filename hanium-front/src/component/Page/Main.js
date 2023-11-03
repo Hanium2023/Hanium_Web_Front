@@ -162,7 +162,17 @@ const Main = () => {
           },
         }
       );
-      setAirPurifierState(response.data.fanMode.value);
+      if (response.data.fanMode.value == "low") {
+        setAirPurifierState("미풍");
+      } else if (response.data.fanMode.value == "sleep") {
+        setAirPurifierState("수면풍");
+      } else if (response.data.fanMode.value == "medium") {
+        setAirPurifierState("약풍");
+      } else if (response.data.fanMode.value == "high") {
+        setAirPurifierState("강풍");
+      } else {
+        setAirPurifierState("알 수 없음");
+      }
     } catch (error) {
       console.error("Error fetching air purifier State:", error);
     }
@@ -198,12 +208,23 @@ const Main = () => {
         }
       );
       // setLightState(response.data.hue.value);
-      if (response.data.hue.value == "150") {
+      if (
+        response.data.hue.value >= "148" &&
+        response.data.hue.value <= "152"
+      ) {
         setLightState("흰색");
-      } else if (response.data.hue.value == "115") {
+      } else if (
+        response.data.hue.value >= "113" &&
+        response.data.hue.value <= "117"
+      ) {
         setLightState("연한 노란색");
-      } else if (response.data.hue.value == "80") {
+      } else if (
+        response.data.hue.value >= "78" &&
+        response.data.hue.value <= "82"
+      ) {
         setLightState("분홍색");
+      } else {
+        setLightState("알 수 없음");
       }
     } catch (error) {
       console.error("Error fetching Light State:", error);
