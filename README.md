@@ -12,8 +12,8 @@
 - 메타 태그
 https://matterport.github.io/showcase-sdk/sdk_creating_mattertags.html
 
-## 화면
-<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/ea9dfa2b-60f8-44ff-b887-eb4ab99e1a37">
+## 화면 
+<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/72537237-ef2c-4b52-b504-ffa260c5e204">
 <img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/cd841513-5577-4905-b3bf-541f774deb78">
 
 
