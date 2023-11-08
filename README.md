@@ -14,9 +14,4 @@ https://matterport.github.io/showcase-sdk/sdk_creating_mattertags.html
 
 ## 화면 
 <img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/72537237-ef2c-4b52-b504-ffa260c5e204">
-<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/cd841513-5577-4905-b3bf-541f774deb78">
-
-
-
-
-
+<img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/e806bcbb-46ce-445e-941d-8f8735482377">
