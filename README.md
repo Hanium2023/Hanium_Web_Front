@@ -1,15 +1,15 @@
 # Hanium_Web_Front
 **[2023 한이음 ICT 공모전] '챗봇으로 IoT 제어' 프로젝트 웹 페이지 대시보드**  
--메타포트로 가전 현황 확인 기능  
--가전 제어 횟수 그래프  
--가전 최종 사용 일자 및 전기요금  
--날씨   
+- 매터포트를 활용한 스마트 홈 가전 제품 장치 현황 확인 기능  
+- 장치 제어 횟수 그래프
+- 장치 최종 사용 일자 및 전기 요금  
+- 실시간 날씨 정보
 
 ## 배포
 [http://haniumfront.s3-website.ap-northeast-2.amazonaws.com/](http://haniumfront.s3-website.ap-northeast-2.amazonaws.com/)
 
 ## 참고
-- 메타 태그
+- 매터포트
 https://matterport.github.io/showcase-sdk/sdk_creating_mattertags.html
 
 ## 화면 
