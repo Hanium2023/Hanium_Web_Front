@@ -5,13 +5,18 @@
 - 장치 최종 사용 일자 및 전기 요금  
 - 실시간 날씨 정보
 
-## 배포
-[http://haniumfront.s3-website.ap-northeast-2.amazonaws.com/](http://haniumfront.s3-website.ap-northeast-2.amazonaws.com/)
+<br/>
 
-## 참고
-- 매터포트
-https://matterport.github.io/showcase-sdk/sdk_creating_mattertags.html
+[3차 ppt 보러가기](https://docs.google.com/presentation/d/1YohHhqhjKu1yeT5l4d2m7YP5onzFu965a4vXEkZpkaw/edit?usp=sharing)
+
+<br/>
 
 ## 화면 
 <img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/72537237-ef2c-4b52-b504-ffa260c5e204">
 <img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/e806bcbb-46ce-445e-941d-8f8735482377">
+
+<br/>
+
+## 참고
+- 매터포트
+https://matterport.github.io/showcase-sdk/sdk_creating_mattertags.html
