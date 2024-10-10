@@ -12,6 +12,8 @@
 <br/>
 
 ## 화면 
+<img width="1233" alt="image" src="https://github.com/user-attachments/assets/20140485-7a1b-405b-b7d5-70b9e6b7a1b5">
+<img width="1233" alt="image" src="https://github.com/user-attachments/assets/0cfa7918-51ef-451b-825c-d2be76d522b7">
 <img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/72537237-ef2c-4b52-b504-ffa260c5e204">
 <img width="1233" alt="image" src="https://github.com/Hanium2023/Hanium_Web_Front/assets/80878955/e806bcbb-46ce-445e-941d-8f8735482377">
 
